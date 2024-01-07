@@ -575,13 +575,13 @@ const SingleProduct = () => {
                     className="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl capitalize"
                     onClick={() => setCheck((prev) => prev + 1)}
                   >
-                    {allData?.model}
+                    {`${allData?.brandName} ${allData?.model} ${allData?.processor} ${allData?.ram} ${allData?.storage} laptop`}
                   </h2>
                   <p className="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
                     <span>${allData?.price}</span>
-                    <span className="text-base font-normal text-gray-500 line-through dark:text-gray-400">
+                    {/* <span className="text-base font-normal text-gray-500 line-through dark:text-gray-400">
                       $1800.99{check}
-                    </span>
+                    </span> */}
                   </p>
 
                   {/* real time */}
