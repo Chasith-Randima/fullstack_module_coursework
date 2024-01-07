@@ -1,7 +1,7 @@
 const AppError = require("./../utils/appError");
 const catchAsync = require("./../utils/catchAsync");
 const APIFeatures = require("./../utils/apiFeatures");
-const Count = require("../models/countModel");
+
 // const { socketSend } = require("../index");
 const { sendMessage } = require("../utils/socketIo");
 
@@ -74,7 +74,29 @@ exports.getAll = (Model) =>
     // console.log(req.params, req.query);
     let filter = {};
     if (req.params.id) filter = { user: req.params.id };
-    // console.log(req.params.id);
+    // if (req.params.createdAt) filter.createdAt = req.query.createdAt;
+    // if (req.query.createdAt) {
+    //   const selectedDate = new Date(req.query.createdAt);
+
+    //   // Check if the selectedDate is a valid Date object
+    //   if (!isNaN(selectedDate)) {
+    //     // Set the start of the day
+    //     const startDate = new Date(selectedDate);
+    //     startDate.setUTCHours(0, 0, 0, 0);
+
+    //     // Set the end of the day
+    //     const endDate = new Date(selectedDate);
+    //     endDate.setUTCHours(23, 59, 59, 999);
+
+    //     filter.createdAt = {
+    //       $gte: startDate.toISOString(),
+    //       $lt: endDate.toISOString(),
+    //     };
+    //   } else {
+    //     console.error("Invalid date parameter:", req.query.createdAt);
+    //   }
+    // }
+    console.log(filter);
     // if (req.query.priceMin) {
     //   let query = JSON.stringify(req.query);
     //   console.log(query);

@@ -5,10 +5,6 @@ const slugify = require("slugify");
 
 const reviewSchema = new mongoose.Schema(
   {
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-    },
     comment: { type: String },
     ratings: {
       type: String,
@@ -29,6 +25,14 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
   // { typeKey: "$type" }
 );
+
+reviewSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+    select: "-__v -passwordChangedAt -password ",
+  });
+  next();
+});
 
 const Review = mongoose.model("Review", reviewSchema);
 

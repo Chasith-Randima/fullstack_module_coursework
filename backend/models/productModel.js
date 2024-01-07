@@ -41,7 +41,7 @@ const productSchema = new mongoose.Schema(
     windows: {
       type: String,
     },
-    brandname: {
+    brandName: {
       type: String,
       // required: [true, "Product must have a brand name..."],
     },
@@ -70,10 +70,10 @@ const productSchema = new mongoose.Schema(
     quantity: {
       type: Number,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-    },
+    // createdAt: {
+    //   type: Date,
+    //   default: Date.now(),
+    // },
     images: [String],
     description: String,
     user: [

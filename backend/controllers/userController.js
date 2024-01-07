@@ -75,7 +75,7 @@ exports.searchUsers = catchAsync(async (req, res, next) => {
   //   console.log(req.query);
   if (search.length != 0) {
     await User.find({
-      $or: [{ name: { $regex: search, $options: "i" } }],
+      $or: [{ username: { $regex: search, $options: "i" } }],
     })
       .then((data) => {
         res.status(200).json({

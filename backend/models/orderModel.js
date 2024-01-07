@@ -11,9 +11,14 @@ const orderSchema = new mongoose.Schema(
     subTotal: {
       type: String,
     },
+    status: {
+      type: String,
+      enum: ["processing", "dispatched", "received"],
+      default: "processing",
+    },
     products: [
       {
-        itemid: { type: String },
+        itemId: { type: String },
         itemprice: { type: Number },
         itemtitle: { type: String },
         itemimages: { type: String },

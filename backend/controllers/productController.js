@@ -8,7 +8,6 @@ const path = require("path");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const { createOne } = require("./orderController");
 
-
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -29,7 +28,7 @@ const upload = multer({
 exports.uploadProductImages = upload.fields([{ name: "images", maxCount: 5 }]);
 
 exports.resizeProductImages = catchAsync(async (req, res, next) => {
-  console.log(req.files);
+  // console.log(req.files);
   if (!req.files?.images) return next();
   console.log(req.body);
 
@@ -105,9 +104,9 @@ exports.searchProducts = catchAsync(async (req, res) => {
       //   res.status(200).json(phones);
       // }
     )
-      .select(
-        "-images -description -discount -price -createdAt -user -productNumber -category -subCategory -brandname"
-      )
+      // .select(
+      //   "-images -description -discount -price -createdAt -user -productNumber -category -subCategory -brandname"
+      // )
       .then((data) => {
         // console.log(data);
         res.status(200).json({
@@ -128,7 +127,7 @@ exports.searchProducts = catchAsync(async (req, res) => {
 
 exports.createCheckout = async (req, res) => {
   console.log(req.body);
-  const products = req.body;
+  const { products, userId, subTotal } = req.body;
 
   const lineItems = products.map((item) => ({
     price_data: {
@@ -152,7 +151,7 @@ exports.createCheckout = async (req, res) => {
     cancel_url: `${process.env.FRONTEND_DOMAIN_DEVELOPMENT}/products/failed`,
   });
 
-  createOne({ products, userId: "2390239", subTotal: 23 });
+  createOne({ products, userId: userId, subTotal: subTotal });
   return res.json({ id: session.id });
 };
 

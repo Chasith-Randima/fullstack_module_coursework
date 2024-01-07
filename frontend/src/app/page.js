@@ -6,6 +6,7 @@ import Modal from "@/components/Modal";
 import SearchProduct from "@/components/SearchProduct";
 
 import ProductCard from "@/components/ProductCard";
+import { brands } from "@/constants";
 // import ShowMore from "@/components/ShowMore";
 // import SearchBar from "@/components/Searchbar";
 // import CustomFilter from "@/components/CustomFilter";
@@ -35,37 +36,12 @@ export default function Home({ searchParams }) {
 
   const { category, brand, price, sort } = filterValues;
 
-  // const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
-  const isDataEmpty = false;
-  const allCars = [
-    {
-      manufacturer: "Honda",
-      year: "2022",
-      fuel: "Diesel",
-      limit: 10,
-      model: "Prius",
-    },
-    {
-      manufacturer: "Honda",
-      year: "2022",
-      fuel: "Diesel",
-      limit: 10,
-      model: "Prius",
-    },
-    {
-      manufacturer: "Honda",
-      year: "2022",
-      fuel: "Diesel",
-      limit: 10,
-      model: "Prius",
-    },
-  ];
-
   const [allData, setAllData] = useState();
   const [show, setShow] = useState(false);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(9);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
+  const [searchClean, setSearchClean] = useState(false);
 
   const [alert, setAlert] = useState({
     message: "",
@@ -115,7 +91,9 @@ export default function Home({ searchParams }) {
 
   useEffect(() => {
     if (search.length == 0) {
+      setSearchClean(true);
       handleSubmit();
+      setSearchClean(false);
     } else {
       handleSearchSubmit();
     }
@@ -185,7 +163,9 @@ export default function Home({ searchParams }) {
       e.preventDefault();
     }
     let params;
-    setAlert({ ...alert, loading: true, message: "Loading..." });
+    if (searchClean == false) {
+      setAlert({ ...alert, loading: true, message: "Loading..." });
+    }
 
     params = {
       limit,
@@ -212,17 +192,19 @@ export default function Home({ searchParams }) {
         if (data.status && data.status == "success") {
           if (data.results == 0) {
             setAllData(data.doc);
-            setAlert({
-              ...alert,
-              loading: false,
-              message: data.message,
-              error: false,
-              success: true,
-            });
+            // if (searchClean == false) {
+            //   setAlert({
+            //     ...alert,
+            //     loading: false,
+            //     message: data.message,
+            //     error: false,
+            //     success: true,
+            //   });
+            // }
 
-            window.setTimeout(() => {
-              resetAlert();
-            }, 1000);
+            // window.setTimeout(() => {
+            //   resetAlert();
+            // }, 1000);
           } else {
             setAllData(data.doc);
             console.log(data.totalCount);
@@ -230,13 +212,15 @@ export default function Home({ searchParams }) {
             setTotalPages(Math.ceil(totalCount / limit));
             setShow(false);
           }
-          setAlert({
-            ...alert,
-            loading: false,
-            message: data.message,
-            error: false,
-            success: true,
-          });
+          if (searchClean == false) {
+            // setAlert({
+            //   ...alert,
+            //   loading: false,
+            //   message: data.message,
+            //   error: false,
+            //   success: true,
+            // });
+          }
 
           window.setTimeout(() => {
             resetAlert();
@@ -271,11 +255,11 @@ export default function Home({ searchParams }) {
         </div> */}
 
         <div className="home__filters ">
-          <div class="w-full md:w-full shadow p-5 rounded-lg bg-white">
-            <div class="relative">
-              <div class="absolute flex items-center ml-2 h-full">
+          <div className="w-full md:w-full shadow p-5 rounded-lg bg-white">
+            <div className="relative">
+              <div className="absolute flex items-center ml-2 h-full">
                 <svg
-                  class="w-4 h-4 fill-current text-primary-gray-dark"
+                  className="w-4 h-4 fill-current text-primary-gray-dark"
                   viewBox="0 0 16 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -287,17 +271,17 @@ export default function Home({ searchParams }) {
               <input
                 type="text"
                 placeholder="Search Product name"
-                class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                 value={search}
                 onChange={handleSearch("search")}
               />
             </div>
 
-            <div class="flex items-center justify-between mt-4">
-              <p class="font-medium">Filters</p>
+            <div className="flex items-center justify-between mt-4">
+              <p className="font-medium">Filters</p>
 
               <button
-                class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md"
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md"
                 onClick={() => resetFilter()}
               >
                 Reset Filter
@@ -305,29 +289,34 @@ export default function Home({ searchParams }) {
             </div>
 
             <div>
-              <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
                 <select
-                  class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                  className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                   value={category}
                   onChange={handleChange("category")}
                 >
                   <option value="">All Type</option>
-                  <option value="Laptop">LapTop</option>
-                  <option value="Desktop">DeskTop</option>
+                  <option value="laptop">LapTop</option>
+                  <option value="desktop">DeskTop</option>
                 </select>
 
                 <select
-                  class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                  className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                   value={brand}
                   onChange={handleChange("brand")}
                 >
                   <option value="">Brand</option>
-                  <option value="apple">Apple</option>
-                  <option value="samsung">Samsung</option>
+                  {brands.map((brand, index) => {
+                    return (
+                      <option value={brand} key={index} className="capitalize">
+                        {brand}
+                      </option>
+                    );
+                  })}
                 </select>
 
                 <select
-                  class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                  className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                   value={price}
                   onChange={handleChange("price")}
                 >
@@ -340,7 +329,7 @@ export default function Home({ searchParams }) {
                 </select>
 
                 <select
-                  class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                  className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                   value={sort}
                   onChange={handleChange("sort")}
                 >
@@ -355,7 +344,7 @@ export default function Home({ searchParams }) {
           </div>
         </div>
 
-        {!isDataEmpty ? (
+        {allData && allData.length > 0 ? (
           <section>
             <div className="home__cars-wrapper">
               {allData?.map((product) => (
@@ -371,7 +360,7 @@ export default function Home({ searchParams }) {
         ) : (
           <div className="home__error-container">
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-            <p>{allCars?.message}</p>
+            <p>{allData?.message}</p>
           </div>
         )}
       </div>
