@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Fullstack Courswork
+name: CI/CD Pipeline for Fullstack Coursework
 
 on:
   push:
@@ -13,17 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up Docker Buildx cache
+        uses: docker/setup-buildx-action@v1
+        with:
+          action: "append"
+          driver-opts: "network=host"
 
       - name: Build and push backend image
         working-directory: backend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-image .
-          docker push ${{ secrets.DOCKER_USERNAME }}/backend-image
+          echo '{"auths": {"https://index.docker.io/v1/": {"username": "'${{ secrets.DOCKER_USERNAME }}'", "password": "'${{ secrets.DOCKER_PASSWORD }}'", "email": secrets.DOCKER_EMAIL}}}' > /tmp/config.json
+          docker buildx create --use
+          docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/test-backend-image . --push --builder default
 
       - name: Build and push frontend image
         working-directory: frontend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-image .
-          docker push ${{ secrets.DOCKER_USERNAME }}/frontend-image
+          echo '{"auths": {"https://index.docker.io/v1/": {"username": "'${{ secrets.DOCKER_USERNAME }}'", "password": "'${{ secrets.DOCKER_PASSWORD }}'", "email": secrets.DOCKER_EMAIL}}}' > /tmp/config.json
+          docker buildx create --use
+          docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/test-frontend-image . --push --builder default
