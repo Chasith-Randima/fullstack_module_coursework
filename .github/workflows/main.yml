@@ -19,11 +19,11 @@ jobs:
       - name: Build and push backend image
         working-directory: backend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/fullstack-coursework-backend-image .
-          docker push ${{ secrets.DOCKER_USERNAME }}/fullstack-coursework-backend-image
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/backend-image .
+          docker push ${{ secrets.DOCKER_USERNAME }}/backend-image
 
       - name: Build and push frontend image
         working-directory: frontend
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/fullstack-coursework-frontend-image .
-          docker push ${{ secrets.DOCKER_USERNAME }}/fullstack-coursework-frontend-image
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend-image .
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend-image
