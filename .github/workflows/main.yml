@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Fullstack Coursework
+name: CI/CD Pipeline for Fullstack Courswork
 
 on:
   push:
