@@ -49,37 +49,22 @@ describe("product", () => {
   describe("get product route", () => {
     describe("given the user logged in creating a product", () => {
       it("should return a 200", async () => {
-        // expect(true).toBe(true);
-        // const productId = 658c3c5251b363d5f5b18410;
+
         const userData = {
-          //   username: "jest user",
           email: "jest@gmail.com",
           password: "1234567890",
-          //   passwordConfirm: "1234567890",
+
         };
 
         const user = await supertest(testApp)
           .post(`/api/v1/users/login`)
-          //   .set("Content-Type", "application/json")
           .send(userData);
-
-        // console.log(
-        //   "--------------------------------------------------------------------------------------------"
-        // );
-        // console.log(user.body);
-        // console.log(
-        //   "--------------------------------------------------------------------------------------------"
-        // );
-        // console.log(user.body.token);
-
         signupUserToken = user.body.token;
-
         const response = await supertest(testApp)
           .post(`/api/v1/products`)
           .set("Authorization", `Bearer ${user.body.token}`)
           .send(exampleProduct);
 
-        // console.log(response.body);
         expect(response.statusCode).toBe(200);
 
         createdProductId = response.body.doc._id;
@@ -113,8 +98,6 @@ describe("product", () => {
             user: [],
             _id: expect.any(String),
             updatedAt: expect.any(String),
-
-            // status: expect.any(String),
             __v: 0,
           },
         });
