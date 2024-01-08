@@ -58,31 +58,8 @@ cd frontend
 npm install
 npm run test
 ```
-environment variables
 
-```bash
-export MONGODB_URL=mongodb://127.0.0.1:27017
-export NODE_ENV=dev
-export FRONTEND_HOST=http://localhost:3000/
 ```
-
-### Secrets
-
-JWT secret can be set by using a env variable, also in case where this variable is not present the application
-will generate one 
-
-```bash
-export SECRET=secret
+This website is a full stack ecommerse site.Users can sign up and login and use it to place orders and so on.
+To access admin routes user must login with admin role account . pre created admin account credentials are made available in the project report.please check it to.
 ```
-
----
-
-### Docs
-
-API documentation can be found on [here](https://documenter.getpostman.com/view/15892759/UzJJucyC#2ad25e08-7d99-4841-a68e-4d5d39438308).
-
-### Project
-
-- common - common code for both frontend and server mostly types
-- web - frontend application
-- server - rest api
