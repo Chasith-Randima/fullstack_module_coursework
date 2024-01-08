@@ -1,55 +1,62 @@
-PUSL3120 FullStack Coursework Ecommerse Site
-Installation instructions
+# PUSL3120 Fullstack Coursework Ecommerse Site
 
-in the main project directory run
-
-docker compose up
-
-to run in docker
-
-if need to run without docker 
-
-backend
-
-cd backend
-npm install
-npm run dev
-
-server will start at port 3001
-
-frontend
-
-cd frontend
-npm install
-npm run dev
-
-
-
-
-# Software Engineering - Internship Assignment
-
-Software Engineering - Internship Assignment 
+Laptop.LK
 
 ## Running the Application
 
 ### Docker
 
-you can use docker-composer to run the application
+
 
 ```bash
-docker-composer up
+docker compose up
 ```
-- api will be hosted on port : 4001
+- api will be hosted on port : 3001
 - frontend web application will host on port : 3000
-- database will be hosted on port : 27017
+- database will be connected to mongodb online(network connection required)
 
 
-### Local setup
+### without docker
 
-setup mongo db, its possible to use docker to setup mongo db locally
+setup frontend and backend separately without docker
+
+### seting up backend
 
 ```bash
-sudo docker run --name surgedb -d -p 27017:27017 mongo
+cd backend
+npm install
+npm run dev
+```
+
+
+### seting up frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+
+
+### Running test cases
+
+
+### backend test cases
+
+```bash
+cd backend
+npm install
+npm run test
+```
+
+
+### frontend test cases
+
+```bash
+cd frontend
+npm install
+npm run test
 ```
 environment variables
 
@@ -79,16 +86,3 @@ API documentation can be found on [here](https://documenter.getpostman.com/view/
 - common - common code for both frontend and server mostly types
 - web - frontend application
 - server - rest api
-frontend will available at port 2000
-
-
-
-to run test cases
-
-frontend
-
-npm run test
-
-backend
-
-npm run test
