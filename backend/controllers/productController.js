@@ -86,10 +86,10 @@ exports.searchProducts = catchAsync(async (req, res) => {
     await Product.find(
       {
         $or: [
-          { title: { $regex: search, $options: "i" } },
-          { category: { $regex: search, $options: "i" } },
-          { slug: { $regex: search, $options: "i" } },
-          { subCategory: { $regex: search, $options: "i" } },
+          { brandName: { $regex: search, $options: "i" } },
+          { model: { $regex: search, $options: "i" } },
+          { ram: { $regex: search, $options: "i" } },
+          { processor: { $regex: search, $options: "i" } },
         ],
       }
       // (err, phones) => {

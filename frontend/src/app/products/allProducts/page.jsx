@@ -6,6 +6,7 @@ import SideBar from "@/components/SideBar";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Modal";
+import { brands } from "@/constants";
 
 const AllProducts = () => {
   const router = useRouter();
@@ -197,7 +198,7 @@ const AllProducts = () => {
       params.price = filterValues.price;
     }
     if (filterValues?.brand) {
-      params.brandname = filterValues.brand;
+      params.brand = filterValues.brand;
     }
     if (filterValues?.quantity) {
       params.quantity = filterValues.quantity;
@@ -323,9 +324,13 @@ const AllProducts = () => {
                           onChange={handleChange("brand")}
                         >
                           <option value="">Select Brand</option>
-                          <option value="apple">Apple</option>
-                          <option value="samsung">Samsung</option>
-                          <option value="received">Recieved</option>
+                          {brands.map((branN, index) => {
+                            return (
+                              <option value={branN} className="capitalize">
+                                {branN}
+                              </option>
+                            );
+                          })}
                         </select>
 
                         <select
@@ -367,13 +372,13 @@ const AllProducts = () => {
                         Product Name
                       </th>
                       <th className="px-6 py-3 font-medium dark:text-gray-400">
+                        Created At
+                      </th>
+                      <th className="px-6 py-3 font-medium dark:text-gray-400">
                         Quantity
                       </th>
                       <th className="px-6 py-3 font-medium dark:text-gray-400">
                         Price
-                      </th>
-                      <th className="px-6 py-3 font-medium dark:text-gray-400">
-                        Created At
                       </th>
                       <th className="px-6 py-3 font-medium dark:text-gray-400">
                         Update
@@ -398,7 +403,7 @@ const AllProducts = () => {
                               </p>
                             </td>
                             <td className="px-6 text-sm font-medium dark:text-gray-400">
-                              {product.title}
+                              {`${product?.model}  ${product?.processor} ${product?.ram} ${product?.storage} laptop`}
                             </td>
                             <td className="px-6 text-sm font-medium dark:text-gray-400">
                               {product.createdAt.split("T")[0]}

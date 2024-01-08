@@ -23,7 +23,10 @@ const ProductCard = ({ product }) => {
   return (
     <div className="car-card group">
       <div className="car-card__content">
-        <h2 className="car-card__content-title">{product.title}</h2>
+        <h2 className="car-card__content-title">
+          {" "}
+          {`${product?.model} ${product?.processor} ${product?.ram} ${product?.storage} laptop`}
+        </h2>
       </div>
 
       <p className="flex mt-6 text-[32px] leading-[38px] font-extrabold">

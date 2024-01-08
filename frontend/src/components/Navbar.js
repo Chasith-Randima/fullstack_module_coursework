@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
-import { ShopContext } from "@/context/show-context";
+import { ShopContext } from "../context/show-context";
 import CustomButton from "./CustomButton";
 
 const NavBar = () => {

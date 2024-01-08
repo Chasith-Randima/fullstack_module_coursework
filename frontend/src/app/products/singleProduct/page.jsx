@@ -15,7 +15,7 @@ import RatingStats from "@/components/RatingStats";
 import { allReviews } from "@/actions/review";
 import { calculateAverageRating, isIdInProducts } from "@/util";
 
-const socket = io("http://127.0.0.1:3000");
+const socket = io("http://127.0.0.1:3001");
 const SingleProduct = () => {
   // let socket = io("http://127.0.0.1:3000");
 
@@ -331,25 +331,26 @@ const SingleProduct = () => {
                   />
                 </div>
                 <div className="flex-wrap hidden md:flex ">
-                  {allData?.images.map((image, index) => {
-                    console.log(image, index, "this is from the slider");
-                    return (
-                      <div className="w-1/2 p-2 sm:w-1/4" key={index}>
-                        <a
-                          href="#"
-                          className="block border border-blue-300 hover:border-blue-300"
-                        >
-                          <img
-                            // src="https://i.postimg.cc/6qcPhTQg/R-18.png"
-                            src={`${process.env.NEXT_PUBLIC_API_DEVELOPMENT}/products/image/${image}`}
-                            alt=""
-                            className="object-cover w-full lg:h-20"
-                            onClick={() => setImageIndex(index)}
-                          />
-                        </a>
-                      </div>
-                    );
-                  })}
+                  {allData &&
+                    allData?.images.map((image, index) => {
+                      console.log(image, index, "this is from the slider");
+                      return (
+                        <div className="w-1/2 p-2 sm:w-1/4" key={index}>
+                          <a
+                            href="#"
+                            className="block border border-blue-300 hover:border-blue-300"
+                          >
+                            <img
+                              // src="https://i.postimg.cc/6qcPhTQg/R-18.png"
+                              src={`${process.env.NEXT_PUBLIC_API_DEVELOPMENT}/products/image/${image}`}
+                              alt=""
+                              className="object-cover w-full lg:h-20"
+                              onClick={() => setImageIndex(index)}
+                            />
+                          </a>
+                        </div>
+                      );
+                    })}
                 </div>
                 <div className="bg-white dark:bg-gray-900">
                   <div className="py-2 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
@@ -575,7 +576,7 @@ const SingleProduct = () => {
                     className="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl capitalize"
                     onClick={() => setCheck((prev) => prev + 1)}
                   >
-                    {`${allData?.brandName} ${allData?.model} ${allData?.processor} ${allData?.ram} ${allData?.storage} laptop`}
+                    {`${allData?.model} ${allData?.processor} ${allData?.ram} ${allData?.storage} laptop`}
                   </h2>
                   <p className="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
                     <span>${allData?.price}</span>
@@ -945,8 +946,17 @@ const SingleProduct = () => {
                   </ul>
                 </div>
               ) : (
-                <div className="space-y-8  md:space-y-0">
-                  There are no reviews for this product
+                <div className="home__error-container">
+                  <h2 className="text-black text-xl font-bold">
+                    No reviews for this product yet
+                  </h2>
+                </div>
+              )}
+              {allReview && allReview.length <= 0 && (
+                <div className="home__error-container">
+                  <h2 className="text-black text-xl font-bold">
+                    No reviews for this product yet
+                  </h2>
                 </div>
               )}
             </div>

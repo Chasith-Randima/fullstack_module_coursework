@@ -306,10 +306,10 @@ export default function Home({ searchParams }) {
                   onChange={handleChange("brand")}
                 >
                   <option value="">Brand</option>
-                  {brands.map((brand, index) => {
+                  {brands.map((brandN, index) => {
                     return (
-                      <option value={brand} key={index} className="capitalize">
-                        {brand}
+                      <option value={brandN} key={index} className="capitalize">
+                        {brandN}
                       </option>
                     );
                   })}

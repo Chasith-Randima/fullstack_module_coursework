@@ -28,7 +28,7 @@ export const createProduct = async (data, token) => {
 };
 
 export const allProducts = (paramsData) => {
-  let url = `${API}/Products`;
+  let url = `${API}/products`;
 
   return axios(url, {
     method: "GET",
@@ -37,7 +37,7 @@ export const allProducts = (paramsData) => {
       page: paramsData.page,
       limit: paramsData.limit,
       category: paramsData.category,
-      brandname: paramsData.brandname,
+      brandName: paramsData.brand,
       "price[lte]": paramsData.price,
       "quantity[lte]": paramsData.quantity,
       // createdAt: paramsData.createdAt,

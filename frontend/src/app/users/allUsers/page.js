@@ -151,24 +151,24 @@ const AllUsers = () => {
         // console.log(data, "from search results");
         console.log(data);
         if (data.status && data.status == "success") {
-          if (data.results == 0) {
-            setAlert({
-              ...alert,
-              loading: false,
-              message: data.message,
-              error: false,
-              success: true,
-            });
-            window.setTimeout(() => {
-              resetAlert();
-            }, 1000);
-          } else {
-            setAllUsers(data.data);
-            console.log(data.totalCount);
-            let totalCount = data.totalCount;
-            setTotalPages(Math.ceil(totalCount / limit));
-            setShow(false);
-          }
+          // if (data.results == 0) {
+          //   setAlert({
+          //     ...alert,
+          //     loading: false,
+          //     message: data.message,
+          //     error: false,
+          //     success: true,
+          //   });
+          //   window.setTimeout(() => {
+          //     resetAlert();
+          //   }, 1000);
+          // } else {
+          setAllUsers(data.data);
+          // console.log(data.totalCount);
+          // let totalCount = data.totalCount;
+          // setTotalPages(Math.ceil(totalCount / limit));
+          // setShow(false);
+          // }
           setAlert({
             ...alert,
             loading: false,
