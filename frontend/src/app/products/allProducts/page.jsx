@@ -55,7 +55,7 @@ const AllProducts = () => {
       if (clicked) {
         await deleteProduct(id, token)
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             setAlert({
               ...alert,
               loading: false,
@@ -121,7 +121,7 @@ const AllProducts = () => {
   // ---------------pagination--------------------------
 
   useEffect(() => {
-    console.log("page changed...", page);
+    // console.log("page changed...", page);
 
     handleSubmit();
     // console.log(allData);
@@ -138,7 +138,7 @@ const AllProducts = () => {
     await searchProducts({ search: search })
       .then((data) => {
         // console.log(data, "from search results");
-        console.log(data);
+        // console.log(data);
         if (data.status && data.status == "success") {
           if (data.results == 0) {
             setAlert({
@@ -172,7 +172,7 @@ const AllProducts = () => {
           }, 1000);
         }
 
-        console.log(allData);
+        // console.log(allData);
       })
       .catch((err) => {
         console.log(err);

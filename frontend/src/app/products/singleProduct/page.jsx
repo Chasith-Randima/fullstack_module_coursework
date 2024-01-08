@@ -79,15 +79,8 @@ const SingleProduct = () => {
 
   useEffect(() => {
     socket.on("receive_user_count", (data) => {
-      console.log(data);
-      // let temp = data.message + realTimeUserCount;
       setRealTimeUserCount(data);
     });
-    // socket.on("userLeft", (data) => {
-    //   console.log(data);
-    //   // let temp = data.message + realTimeUserCount;
-    //   setRealTimeUserCount(data.roomSize);
-    // });
   }, [socket]);
 
   useEffect(() => {
@@ -98,17 +91,9 @@ const SingleProduct = () => {
   // ---------------SOCKET CHAT -------------------
 
   const tempFunc = (data) => {
-    console.log(data, "from the temp func....");
-    // await setUserCount((prev) => [...prev, ...data]);
-
     alert(data.count);
     setUserCount(data);
-    console.log(data, userCount, "from the temp func....");
   };
-
-  // useEffect(() => {
-  //   console.log(userCount);
-  // }, [userCount]);
 
   const resetAlert = () => {
     setAlert({ message: "", error: false, loading: false, success: false });
@@ -235,36 +220,8 @@ const SingleProduct = () => {
     // console.log(id);
     await allReviews(data)
       .then((data) => {
-        console.log(data, "reviews.........................");
         if (data.status && data.status == "success") {
-          // if (data.results == 0) {
-          //   setAlert({
-          //     ...alert,
-          //     loading: false,
-          //     message: data.message,
-          //     error: false,
-          //     success: true,
-          //   });
-
-          //   window.setTimeout(() => {
-          //     resetAlert();
-          //   }, 1000);
-          // } else {
           setAllReview(data.doc);
-          console.log(data.doc, "inside else");
-
-          // console.log(data.totalCount);
-          // let totalCount = data.totalCount;
-          // setTotalPages(Math.ceil(totalCount / limit));
-          // setShow(false);
-          // }
-          // setAlert({
-          //   ...alert,
-          //   loading: false,
-          //   message: data.message,
-          //   error: false,
-          //   success: true,
-          // });
 
           window.setTimeout(() => {
             resetAlert();
@@ -283,24 +240,6 @@ const SingleProduct = () => {
         });
       });
   };
-
-  // if (allData) {
-
-  // useEffect(() => {
-  //   // if (paramsData?.productId) {
-  //   socket.on(`product:6585c532f568a9e2fbefab9c`, (count) => {
-  //     console.log(count, "from client socket---------");
-  //   });
-  //   // }
-  //   // console.log(`product:${paramsData.productId}`);
-  //   // socket.on(`product:${paramsData.productId}`, (count) => {
-  //   //   console.log(count, "from client socket---------");
-  //   // });
-  // }, [socket]);
-
-  // useEffect(() => {
-
-  // }, [socket]);
 
   return (
     <>
@@ -755,102 +694,6 @@ const SingleProduct = () => {
                       productID={paramsData.productId}
                     />
                   )}
-                  {/* <div class="text-gray-700">
-                    <p class="font-medium">Reviews</p>
-                    <ul class="mb-6 mt-2 space-y-2">
-                      <li class="flex items-center text-sm font-medium">
-                        <span class="w-3">5</span>
-                        <span class="mr-4 text-yellow-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </span>
-                        <div class="mr-4 h-2 w-96 overflow-hidden rounded-full bg-gray-300">
-                          <div class="h-full w-10/12 bg-yellow-400"></div>
-                        </div>
-                        <span class="w-3">56</span>
-                      </li>
-                      <li class="flex items-center text-sm font-medium">
-                        <span class="w-3">4</span>
-                        <span class="mr-4 text-yellow-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </span>
-                        <div class="mr-4 h-2 w-96 overflow-hidden rounded-full bg-gray-300">
-                          <div class="h-full w-8/12 bg-yellow-400"></div>
-                        </div>
-                        <span class="w-3">12</span>
-                      </li>
-                      <li class="flex items-center text-sm font-medium">
-                        <span class="w-3">3</span>
-                        <span class="mr-4 text-yellow-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </span>
-                        <div class="mr-4 h-2 w-96 overflow-hidden rounded-full bg-gray-300">
-                          <div class="h-full w-1/12 bg-yellow-400"></div>
-                        </div>
-                        <span class="w-3">4</span>
-                      </li>
-                      <li class="flex items-center text-sm font-medium">
-                        <span class="w-3">2</span>
-                        <span class="mr-4 text-yellow-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </span>
-                        <div class="mr-4 h-2 w-96 overflow-hidden rounded-full bg-gray-300">
-                          <div class="h-full w-0 bg-yellow-400"></div>
-                        </div>
-                        <span class="w-3">0</span>
-                      </li>
-                      <li class="flex items-center text-sm font-medium">
-                        <span class="w-3">1</span>
-                        <span class="mr-4 text-yellow-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </span>
-                        <div class="mr-4 h-2 w-96 overflow-hidden rounded-full bg-gray-300">
-                          <div class="h-full w-1/12 bg-yellow-400"></div>
-                        </div>
-                        <span class="w-3">5</span>
-                      </li>
-                    </ul>
-                    <button
-                      class="w-36 rounded-full bg-blue-900 py-3 text-white font-medium"
-                      onClick={() => setShowReviewModel(true)}
-                    >
-                      Write a review
-                    </button>
-                  </div> */}
                 </div>
               </div>
 

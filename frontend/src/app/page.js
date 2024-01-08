@@ -106,7 +106,7 @@ export default function Home({ searchParams }) {
     await searchProducts({ search: search })
       .then((data) => {
         // console.log(data, "from search results");
-        console.log(data);
+        // console.log(data);
         if (data.status && data.status == "success") {
           if (data.results == 0) {
             setAlert({
@@ -140,7 +140,7 @@ export default function Home({ searchParams }) {
           }, 1000);
         }
 
-        console.log(allData);
+        // console.log(allData);
       })
       .catch((err) => {
         console.log(err);
@@ -148,7 +148,7 @@ export default function Home({ searchParams }) {
   };
 
   useEffect(() => {
-    console.log("page changed...", page);
+    // console.log("page changed...", page);
 
     handleSubmit();
     // console.log(allData);
@@ -188,7 +188,7 @@ export default function Home({ searchParams }) {
 
     await allProducts(params)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.status && data.status == "success") {
           if (data.results == 0) {
             setAllData(data.doc);
@@ -207,7 +207,7 @@ export default function Home({ searchParams }) {
             // }, 1000);
           } else {
             setAllData(data.doc);
-            console.log(data.totalCount);
+            // console.log(data.totalCount);
             let totalCount = data.totalCount;
             setTotalPages(Math.ceil(totalCount / limit));
             setShow(false);
@@ -241,7 +241,7 @@ export default function Home({ searchParams }) {
         });
       });
   };
-  console.log(allData, "is there data...");
+  // console.log(allData, "is there data...");
 
   return (
     <main className="overflow-hidden">
