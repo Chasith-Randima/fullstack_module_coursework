@@ -1,5 +1,5 @@
-##PUSL3120 FullStack Coursework Ecommerse Site
-#Installation instructions
+PUSL3120 FullStack Coursework Ecommerse Site
+Installation instructions
 
 in the main project directory run
 
