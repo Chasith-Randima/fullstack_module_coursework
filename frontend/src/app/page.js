@@ -173,7 +173,7 @@ export default function Home({ searchParams }) {
     };
 
     if (filterValues?.brand) {
-      params.brand = filterValues.brand;
+      params.brandName = filterValues.brand;
     }
     if (filterValues?.category) {
       params.category = filterValues.category;

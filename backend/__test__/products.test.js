@@ -1,7 +1,8 @@
 const supertest = require("supertest");
 const productController = require("../controllers/productController");
 const Product = require("../models/productModel");
-const app = require("../app");
+// const app = require("../app");
+const app = require("../index");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
@@ -17,34 +18,32 @@ const factory = require("../controllers/handlerFactory");
 dotenv.config({ path: "./config.env" });
 const port = process.env.PORT_TEST || 3002;
 
-let testApp;
+let testApp = app;
 
 let signupUserToken;
 let createdProductId;
 
 describe("product", () => {
   beforeAll(async () => {
-    setTimeout(() => {
-      console.log("End");
-    }, 5000);
-    testApp = await app.listen(port, () => {
-      console.log(`Server running on port : ${port}`);
-    });
-    await mongoose
-      .connect(process.env.DATABASE, {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-      })
-      .then(() => {
-        console.log("DB Connection Successfull...");
-      });
+
+    // testApp = await app.listen(port, () => {
+    //   console.log(`Server running on port : ${port}`);
+    // });
+    // await mongoose
+    //   .connect(process.env.DATABASE, {
+    //     // useNewUrlParser: true,
+    //     // useUnifiedTopology: true,
+    //   })
+    //   .then(() => {
+    //     console.log("DB Connection Successfull...");
+    //   });
   });
 
   afterAll(async () => {
-    await testApp.close();
+    // await testApp.close();
 
-    await mongoose.disconnect();
-    await mongoose.connection.close();
+    // await mongoose.disconnect();
+    // await mongoose.connection.close();
   });
   describe("get product route", () => {
     describe("given the user logged in creating a product", () => {
@@ -92,6 +91,7 @@ describe("product", () => {
             model: "XYZ123",
             processor: "Intel Core i7",
             ram: "16GB DDR4",
+            brandName: "ABC Electronics",
             storage: "512GB SSD",
             display: "15.6-inch FHD",
             graphics: "NVIDIA GeForce RTX 3080",
@@ -162,6 +162,7 @@ describe("product", () => {
             model: "JEST_TEST_MODEL",
             processor: "Intel Core i7",
             ram: "16GB DDR4",
+            brandName: "ABC Electronics",
             storage: "512GB SSD",
             display: "15.6-inch FHD",
             graphics: "NVIDIA GeForce RTX 3080",
@@ -225,6 +226,7 @@ describe("product", () => {
           model: "XYZ123",
           processor: "Intel Core i7",
           ram: "16GB DDR4",
+          brandName: "ABC Electronics",
           storage: "512GB SSD",
           display: "15.6-inch FHD",
           graphics: "NVIDIA GeForce RTX 3080",
@@ -271,6 +273,7 @@ describe("product", () => {
           model: "XYZ123",
           processor: "Intel Core i7",
           ram: "16GB DDR4",
+          brandName: "ABC Electronics",
           storage: "512GB SSD",
           display: "15.6-inch FHD",
           graphics: "NVIDIA GeForce RTX 3080",
@@ -324,6 +327,7 @@ describe("product", () => {
           ram: "16GB DDR4",
           storage: "512GB SSD",
           display: "15.6-inch FHD",
+          brandName: "ABC Electronics",
           graphics: "NVIDIA GeForce RTX 3080",
           weight: "2.5 kg",
           battery: "Lithium-ion, 6-cell",
@@ -373,6 +377,7 @@ describe("product", () => {
           ram: "16GB DDR4",
           storage: "512GB SSD",
           display: "15.6-inch FHD",
+          brandName: "ABC Electronics",
           graphics: "NVIDIA GeForce RTX 3080",
           weight: "2.5 kg",
           battery: "Lithium-ion, 6-cell",

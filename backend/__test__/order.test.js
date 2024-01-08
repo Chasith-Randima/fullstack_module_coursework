@@ -1,5 +1,6 @@
 const supertest = require("supertest");
-const app = require("../app");
+// const app = require("../app");
+const app = require("../index");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
@@ -11,41 +12,37 @@ const Order = require("../models/orderModel");
 dotenv.config({ path: "./config.env" });
 const port = process.env.PORT_TEST || 3002;
 
-let testApp;
+let testApp  = app;
 let signupUserToken;
 let createdOrderId;
 let signupUserId;
 
 describe("product", () => {
-  beforeAll(async () => {
-    // const mongoServer = await MongoMemoryServer.create();
+  // beforeAll(async () => {
+  //   // const mongoServer = await MongoMemoryServer.create();
 
-    // await mongoose.connect(mongoServer.getUri());
-    setTimeout(() => {
-      console.log("End");
-    }, 5000);
-    testApp = app.listen(port, () => {
-      console.log(`Server running on port : ${port}`);
-    });
+  //   // await mongoose.connect(mongoServer.getUri());
 
-    await mongoose
-      .connect(process.env.DATABASE, {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-      })
-      .then(() => {
-        console.log("DB Connection Successfull...");
-      });
-  });
+  //   testApp = app.listen(port, () => {
+  //     console.log(`Server running on port : ${port}`);
+  //   });
 
-  afterAll(async () => {
-    await testApp.close();
-    setTimeout(() => {
-      console.log("End");
-    }, 5000);
-    await mongoose.disconnect();
-    await mongoose.connection.close();
-  });
+  //   await mongoose
+  //     .connect(process.env.DATABASE, {
+  //       // useNewUrlParser: true,
+  //       // useUnifiedTopology: true,
+  //     })
+  //     .then(() => {
+  //       console.log("DB Connection Successfull...");
+  //     });
+  // });
+
+  // afterAll(async () => {
+  //   await testApp.close();
+ 
+  //   await mongoose.disconnect();
+  //   await mongoose.connection.close();
+  // });
   describe("get order route", () => {
     describe("given the user logged in creating a order", () => {
       it("should return a 200", async () => {

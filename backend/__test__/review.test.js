@@ -1,5 +1,6 @@
 const supertest = require("supertest");
-const app = require("../app");
+// const app = require("../app");
+const app = require("../index");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
@@ -18,33 +19,33 @@ let createdReviewId;
 let signupUserId;
 
 describe("product", () => {
-  beforeAll(async () => {
-    // const mongoServer = await MongoMemoryServer.create();
+  // beforeAll(async () => {
+  //   // const mongoServer = await MongoMemoryServer.create();
 
-    // await mongoose.connect(mongoServer.getUri());
-    setTimeout(() => {
-      console.log("End");
-    }, 5000);
-    testApp = app.listen(port, () => {
-      console.log(`Server running on port : ${port}`);
-    });
+  //   // await mongoose.connect(mongoServer.getUri());
+  //   setTimeout(() => {
+  //     console.log("End");
+  //   }, 5000);
+  //   testApp = app.listen(port, () => {
+  //     console.log(`Server running on port : ${port}`);
+  //   });
 
-    await mongoose
-      .connect(process.env.DATABASE, {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-      })
-      .then(() => {
-        console.log("DB Connection Successfull...");
-      });
-  });
+  //   await mongoose
+  //     .connect(process.env.DATABASE, {
+  //       // useNewUrlParser: true,
+  //       // useUnifiedTopology: true,
+  //     })
+  //     .then(() => {
+  //       console.log("DB Connection Successfull...");
+  //     });
+  // });
 
-  afterAll(async () => {
-    await testApp.close();
+  // afterAll(async () => {
+  //   await testApp.close();
 
-    await mongoose.disconnect();
-    await mongoose.connection.close();
-  });
+  //   await mongoose.disconnect();
+  //   await mongoose.connection.close();
+  // });
   describe("get product route", () => {
     describe("given the user logged in creating a product", () => {
       it("should return a 200", async () => {
