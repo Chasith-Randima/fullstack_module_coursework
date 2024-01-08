@@ -22,4 +22,39 @@ describe("footer Component", () => {
 
     // Assert that the component renders without throwing any errors
   });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
+  test("renders without errors", async () => {
+    render(<Footer />);
+
+    // Assert that the component renders without throwing any errors
+  });
 });
